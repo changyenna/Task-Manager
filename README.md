@@ -8,10 +8,7 @@
 Task managers are helpful when juggling multiple responsibilities, ensuring deadlines are met in a proactive manner, and staying organized. In the form of a comprehensive to-do list, we aimed to create a space where the user has a visual representation of the tasks they must accomplish. Our group hopes that the program is a useful productivity tool for students and professionals who aim to be more productive with less stress.
 
 ### Languages/Tools/Technologies Used
-	* C++
-	* Google Tests
-	* Valgrind
-	* CMake/Makefile
+This project will be coded in C++. In our quest for strong code quality, we have chosen to integrate the Google Test framework (gtest) for comprehensive unit testing. To ensure memory management and code efficiency, we'll utilize Valgrind. Additionally, for build and project management, we will employ CMake and Makefile, streamlining our development process and enhancing project organization.
    
 ### Input/Output & Features
 A user can create tasks that include a title, description, classification (e.g. personal, work, study), priority, and a due date. Additional features are optional, so the user can customize their list to be as comprehensive or simple as they choose. This list can represent larger tasks with subtasks within them or be a simple to-do list. Users can also display, edit, and delete tasks through the main menu.
@@ -21,13 +18,21 @@ A user can create tasks that include a title, description, classification (e.g. 
 ### Task Manager Strategy Pattern
 ![](UML.png)
 
-Main menu implements a user interface for the user to edit/delete/create tasks. Sort class sorts tasks into three different categories. Tasks itself contains the attributes that the user would like to track, sort, and find.
+In our Task Manager project, we have employed the Strategy Pattern to enhance the flexibility and maintainability of our code. This pattern allows us to encapsulate algorithms, making it easy to switch between different strategies dynamically during runtime.
 
-1. The intent of the strategy pattern is to encapsulate an algorithm. In particular, we can encapsulate multiple implementations of similar algorithms. We can also extend the number of different strategies at will. Ultimately, to implement different algorithms appropriate to the user’s different situations.
+### Why We Chose the Strategy Pattern
+1. Modular Thinking: The Strategy Pattern encourages modular thinking. By isolating sorting algorithms into separate strategy classes, we create clear and self-contained components. This separation simplifies our codebase and makes it more understandable.
 
-2. We chose to implement a strategy pattern because, we had multiple sorting strategies/algorithms to use dynamically during run-time.
+2. Eliminating Conditional Statements: Prior to employing the Strategy Pattern, we faced the challenge of managing multiple sorting strategies with conditional statements. These conditionals not only made the code complex but also made it harder to add new sorting strategies. With the Strategy Pattern, we eliminate these conditionals and replace them with elegant, self-contained strategy classes.
 
-3. Coding a strategy pattern allows us to think in modules, it also eliminates conditional statements. Additionally, it helps us understand the nature of composition and inheritance relationships. The pattern also teaches us on a great use of encapsulation.
+3. Dynamic Strategy Selection: The Strategy Pattern enables us to select sorting strategies dynamically at runtime. This means that we can adapt our sorting approach based on the user's preferences or the specific requirements of the task manager.
+
+4. Extensibility: As our project evolves, we can effortlessly introduce new sorting strategies by implementing additional strategy classes. This extensibility ensures that our code remains adaptable to future needs.
+
+5. Encapsulation and Abstraction: By encapsulating sorting algorithms within strategy classes, we achieve a high level of encapsulation and abstraction. This not only makes our code more maintainable but also promotes code reuse and understanding.
+
+### Utilizing the Strategy Pattern
+Here are the classes where the Strategy Pattern is employed:
 
 `Sort.hpp`: This file defines the abstract Sort class, which serves as the interface for all sorting strategies. It contains a pure virtual function sort that every concrete sorting strategy must implement.
 ```cpp
