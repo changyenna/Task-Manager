@@ -18,7 +18,7 @@ A user can create tasks that include a title, description, classification (e.g. 
 
 ## Phase II: Design
 
-### Task Manager Prototype Pattern
+### Task Manager Strategy Pattern
 ![](UML.png)
 
 Main menu implements a user interface for the user to edit/delete/create tasks. Sort class sorts tasks into three different categories. Tasks itself contains the attributes that the user would like to track, sort, and find.
