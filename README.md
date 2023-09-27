@@ -28,13 +28,98 @@ Main menu implements a user interface for the user to edit/delete/create tasks. 
 2. We chose to implement a strategy pattern because, we had multiple sorting strategies/algorithms to use dynamically during run-time.
 
 3. Coding a strategy pattern allows us to think in modules, it also eliminates conditional statements. Additionally, it helps us understand the nature of composition and inheritance relationships. The pattern also teaches us on a great use of encapsulation.
+
+`Sort.hpp`: This file defines the abstract Sort class, which serves as the interface for all sorting strategies. It contains a pure virtual function sort that every concrete sorting strategy must implement.
+```cpp
+class Sort {
+public:
+    virtual vector<Task*> sort(vector<Task*> sortedVector, Task* newTask) = 0;
+};
+```
+`DateSort.hpp`: Here, we implement the DateSort class, which, like the others, inherits from Sort. DateSort is responsible for sorting tasks by their due dates in ascending order.
+```cpp
+class DateSort : public Sort {
+	public:
+
+	vector<Task*> sort(vector<Task*> sortedVector, Task* newTask) {
+		int year = newTask->getYear() ;
+		int month = newTask->getMonth() ;
+		int day = newTask->getDay();
+		bool inserted = false;
+		
+		for (int i = 0; i < sortedVector.size(); ++i) {
+			if (year < sortedVector.at(i)->getYear()) {
+				sortedVector.insert(sortedVector.begin() + i, newTask);
+				return sortedVector;
+			}
+			else if (month < sortedVector.at(i)->getMonth() && year <= sortedVector.at(i)->getYear()) {
+				sortedVector.insert(sortedVector.begin() + i, newTask);
+				return sortedVector;
+			}
+			else if (day < sortedVector.at(i)->getDay() && month <= sortedVector.at(i)->getMonth() && year <= sortedVector.at(i)->getYear()) {
+				sortedVector.insert(sortedVector.begin() +i, newTask);
+				return sortedVector;
+			}
+		}
+
+		sortedVector.push_back(newTask);
+		return sortedVector;		
+	}
+};
+```
+`PrioSort.hpp`: In this file, we implement the PrioSort class, which also inherits from Sort. PrioSort is used for sorting tasks based on their priorities, from highest to lowest.
+```cpp
+class PrioSort : public Sort {
+        public:
+
+        vector<Task*> sort(vector<Task*> sortedVector, Task* newTask) {
+
+                /*checks each task based on priority. 3 highest priority, 1 lowest priority*/
+                for (int i = 0; i < sortedVector.size(); ++i) {
+                        if (newTask->getPrio() > sortedVector.at(i)->getPrio()) {
+                                sortedVector.insert(sortedVector.begin() + i, newTask);
+                                return sortedVector;
+                        }
+                }
+
+                sortedVector.push_back(newTask);
+                return sortedVector;
+        }
+};
+```
+`TagSort.hpp`: In this file, we implement the TagSort class, which inherits from Sort. TagSort is responsible for sorting tasks based on their tags in alphabetical order.
+```cpp
+class TagSort : public Sort {
+	public:
+
+        vector<Task*> sort(vector<Task*> sortedVector, Task* newTask) {
+		int compare = 0;
+
+		string newTag = newTask->getTag();
+		string oldTag = "";
+               /*sorts by tag, alphabetically*/
+                for (int i = 0; i < sortedVector.size(); ++i) {
+                        oldTag = sortedVector.at(i)->getTag();
+			compare = newTag.compare(oldTag); //compares newTask tag alphabetically with each element of the vector.
+			if (compare < 0) {			
+                                sortedVector.insert(sortedVector.begin() + i, newTask);
+                                return sortedVector;
+                        }
+                }
+		cout << endl;
+                sortedVector.push_back(newTask);
+                return sortedVector;
+        }
+};
+```
+To utilize these sorting strategies in our Task Manager, we can choose a strategy at runtime and apply it to our list of tasks. 
  
 ## Phase III: Development, Testing and Scrum Meeting
 
 We ensured that all of our unit test cases conform to the Google Test Framework. These test executables are initially run on our local machines to validate their functionality.
 
 Some unit test cases include:
-```
+```cpp
 TEST(outputOldUserCSV, EmptyCSV) {
 	string userName = "unittest1";
 	MainMenu menu;
