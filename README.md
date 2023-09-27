@@ -31,49 +31,335 @@ Main menu implements a user interface for the user to edit/delete/create tasks. 
  
 ## Phase III: Development, Testing and Scrum Meeting
 
-## Screenshots
-Screenshots of the input/output after running your application
-
 ### New User Startup Menu
- ![](SC_1.PNG)
-
+```
+---------------------------------------
+|           W E L C O M E             |
+---------------------------------------
+---------------------------------------
+|           Are you a new user?       |
+|           y - Yes                   |
+|           n - No                    |
+---------------------------------------
+y
+---------------------------------------
+|       Please enter a username       |
+|          (case sensitive)           |
+---------------------------------------
+ychan092  
+AllUserNames/ychan092.csv is created!
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+a
+```
 ### Add Task Menu
- ![](SC_2.PNG)
- >
- ![](SC_3.PNG)
+```
+---------------------------------------
+|         Enter Title of Task:         |
+---------------------------------------
+Update resume
+title set:Update resume
+---------------------------------------
+|         Description for task?        |
+|        (Press Enter for none)        |
+---------------------------------------
+Add Task Manager project item
+set description:Add Task Manager project item
+---------------------------------------
+|          Priority for task?          |
+|          Pick 1 for least important  |
+|          Pick 2 for important        |
+|          Pick 3 for most important   |
+|         (Press n for not important)  |
+---------------------------------------
+2
+entered:2
+---------------------------------------
+|          Tag the task?               |
+|          h - homework                |
+|          s - study                   |
+|          p - personal                |
+|          b - business                |
+|          e - event                   |
+|          w - work                    |
+|          o - other                   |
+|         (Press n for no tag)         |
+---------------------------------------
+p
+entered:p
+---------------------------------------
+|           Need a due date?          |
+|               y- yes                |
+|               n- no                 |
+---------------------------------------
+y
+entered yes (yes date)
+---------------------------------------
+|      Input month in form (xx)       |
+|        Example: July--> 07          |
+---------------------------------------
+07
+Month:7
+---------------------------------------
+|      Input day in form (xx)          |
+|        Example: day--> 28            |
+---------------------------------------
+12
+Day:12
+---------------------------------------
+|       Input year in form (xxxx)      |
+|      Example: year 2022--> 2022      |
+---------------------------------------
+2023
+Year:2023
 
-
+Tasks successfully saved in AllUserNames/ychan092.csv
+```
 ### Show Task menu
- ![](SC_4.PNG)
+```
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+s
+--------------------------------------------------------------------------------
+| Would you like to display your tasks in order by dates, priorities, or tags? |
+|            Enter 1 for dates, 2 for priorities, 3 for tags.                  |
+|          Enter 0 if you would like to print by date added.                        |
+--------------------------------------------------------------------------------
+0
 
-
+----------------------------
+1) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add Task Manager project item
+----------------------------
+```
 ### Edit Task menu
- ![](SC_5.PNG)
+```
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+e
+--------------------------------------------
+|       What would you like to edit?       |
+|         A. Title                         |
+|         B. Description                   |
+|         C. Tag                           |
+|         D. Priority                      |
+|         E. Date                          |
+|       Press Q to Exit.                   |
+---------------------------------------------
+b
 
+--------------------------------------------------------------------
+|      Please enter the title the task you would like to edit.     |
+--------------------------------------------------------------------
+----------------------------
+1) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add Task Manager project item
+----------------------------
 
+Update resume
+
+-------------------------------------------
+|     Please enter a new description.     |
+--------------------------------------------
+Add task manager project item
+
+Okay. Description for Update resume has been changed to Add task manager project item.
+----------------------------
+1) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add task manager project item
+----------------------------
+
+Tasks successfully saved in AllUserNames/ychan092.csv
+```
+### Show Task menu
+#### Sorting by date
+```
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+s
+--------------------------------------------------------------------------------
+| Would you like to display your tasks in order by dates, priorities, or tags? |
+|            Enter 1 for dates, 2 for priorities, 3 for tags.                  |
+|          Enter 0 if you would like to print by date added.                   |
+--------------------------------------------------------------------------------
+1
+
+----------------------------
+1) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add task manager project item
+----------------------------
+2) LeetCode
+Due Date(mm/dd/yyyy): 7/13/2023
+Prio: 1|Tag: Study
+Desc:Complete daily LeetCode challenge
+----------------------------
+3) Email recruiter
+Due Date(mm/dd/yyyy): 7/14/2023
+Prio: 3|Tag: Business
+Desc:Send recruiter resume
+----------------------------
+```
+#### Sorting by priority
+```
+--------------------------------------------------------------------------------
+| Would you like to display your tasks in order by dates, priorities, or tags? |
+|            Enter 1 for dates, 2 for priorities, 3 for tags.                  |
+|          Enter 0 if you would like to print by date added.                   |
+--------------------------------------------------------------------------------
+2
+
+----------------------------
+1) Email recruiter
+Due Date(mm/dd/yyyy): 7/14/2023
+Prio: 3|Tag: Business
+Desc:Send recruiter resume
+----------------------------
+2) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add task manager project item
+----------------------------
+3) LeetCode
+Due Date(mm/dd/yyyy): 7/13/2023
+Prio: 1|Tag: Study
+Desc:Complete daily LeetCode challenge
+----------------------------
+```
+#### Sorting by tag
+```
+--------------------------------------------------------------------------------
+| Would you like to display your tasks in order by dates, priorities, or tags? |
+|            Enter 1 for dates, 2 for priorities, 3 for tags.                  |
+|          Enter 0 if you would like to print by date added.                   |
+--------------------------------------------------------------------------------
+3
+
+----------------------------
+1) Email recruiter
+Due Date(mm/dd/yyyy): 7/14/2023
+Prio: 3|Tag: Business
+Desc:Send recruiter resume
+----------------------------
+2) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add task manager project item
+----------------------------
+3) LeetCode
+Due Date(mm/dd/yyyy): 7/13/2023
+Prio: 1|Tag: Study
+Desc:Complete daily LeetCode challenge
+----------------------------
+```
 ### Delete Task menu
- ![](SC_6.PNG)
+```
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+d
+---------------------------------------
+|  Enter Title of Task for Deletion:   |
+---------------------------------------
+LeetCode
+---------------------------------------
+|         ♪♪ Task Deleted!♪♪           |
+---------------------------------------
+```
+### Old User Startup Menu
+```
+---------------------------------------
+|           W E L C O M E             |
+---------------------------------------
+---------------------------------------
+|           Are you a new user?       |
+|           y - Yes                   |
+|           n - No                    |
+---------------------------------------
+n
+---------------------------------------
+|       Please enter your username    |
+|          (case sensitive)           |
+---------------------------------------
+ychan092
+AllUserNames/ychan092.csv has been accessed!
+```
+#### After deleting the LeetCode task item and reloading the user's tasks the output yeilds:
+```
+--------------------------------------------------------------------------------
+| Would you like to display your tasks in order by dates, priorities, or tags? |
+|            Enter 1 for dates, 2 for priorities, 3 for tags.                  |
+|          Enter 0 if you would like to print by date added.                   |
+--------------------------------------------------------------------------------
+0
 
-
+----------------------------
+1) Update resume
+Due Date(mm/dd/yyyy): 7/12/2023
+Prio: 2|Tag: Personal
+Desc:Add task manager project item
+----------------------------
+2) Email recruiter
+Due Date(mm/dd/yyyy): 7/14/2023
+Prio: 3|Tag: Business
+Desc:Send recruiter resume
+----------------------------
+```
 ### Exiting Program Message
-  ![](SC_7.PNG)
- 
- ### Old User Startup Menu
-  ![](SC_8.PNG)
- >
-
-
-
-
+```
+---------------------------------------
+|      What would you like to do?     |
+|      a - Add a task                 |
+|      d - Delete a task              |
+|      e - Edit a task                |
+|      s - Show all tasks             |
+|      q - Close program              |
+---------------------------------------
+q
+Tasks successfully saved in AllUserNames/ychan092.csv
+---------------------------------------
+|           G O O D B Y E             |
+---------------------------------------
+```
 ## Installation/Usage
-To use this program, use an IDE to clone this repository.
-```
-$ git clone https://github.com/cs100/final-project-bhoan008-jlo034-aesti002-bnguy225-ychan092.git
-$ cd final-project-bhoan008-jlo034-aesti002-bnguy225-ychan092
-$ cmake3 .
-$ make
-$ ./TaskManager
-```
+To use this program, first clone the repository `git clone https://github.com/cs100/final-project-bhoan008-jlo034-aesti002-bnguy225-ychan092.git`. Then, `cd` into the repo, configure cmake (`cmake .`, `make`), and lastly run `./TaskManager`.
+
 > If not working, use this before cmake3: git submodule update --init --recursive
 
 #### Follow the sequence within main.cpp as follows:
