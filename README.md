@@ -31,6 +31,305 @@ Main menu implements a user interface for the user to edit/delete/create tasks. 
  
 ## Phase III: Development, Testing and Scrum Meeting
 
+We ensured that all of our unit test cases conform to the Google Test Framework. These test executables are initially run on our local machines to validate their functionality.
+
+Some unit test cases include:
+```
+TEST(outputOldUserCSV, EmptyCSV) {
+	string userName = "unittest1";
+	MainMenu menu;
+	menu.outputOldUserFile(userName);
+	EXPECT_EQ(menu.getDateSize(), 0);
+}
+
+TEST(deleteTask, SuccesfulDeletion) {
+	string title = "Doggy";
+	MainMenu test;
+
+	Task* A = new Task("Doggy", "It's an animal", 3, "Dog");
+
+	test.addTask(A);	
+	test.deleteTask(title);
+
+	EXPECT_EQ(test.getDateSize(), 0);
+}
+
+TEST(deleteTask, FailedDeletion) {
+        string title = "Doggy";
+        MainMenu test;
+
+        Task* A = new Task("Doggy", "It's an animal", 3, "Dog");
+
+        test.addTask(A);
+        test.deleteTask("Catty");
+
+        EXPECT_NE(test.getDateSize(), 0);
+}
+
+TEST(addTask, TaskAddition) {
+	MainMenu test;
+        Task* A = new Task("Doggy", "It's an animal", 3, "Work");
+
+	test.addTask(A);
+	
+	EXPECT_EQ((test.getDateSize() +	test.getPrioSize() + test.getTagSize()) / 3, 1);
+	
+}
+
+TEST(addTask, NewTaskTitle) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Doggy", "", 0, "");
+
+        test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+        EXPECT_EQ(total, "Doggy0");
+}
+
+TEST(addTask, TaskDesc) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Doggy", "Poops A lot :)", 0, "");
+        
+	test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+        
+        EXPECT_EQ(total, "DoggyPoops A lot :)0");
+}
+
+TEST(addTask, TaskPrio) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Doggy", "Poops A lot :)", 3, "");
+ 
+        test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "DoggyPoops A lot :)3");
+}
+
+TEST(addTask, TaskTag) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Doggy", "Poops A lot :)", 2, "Other");
+
+        test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "DoggyPoops A lot :)2Other");
+}
+
+TEST(addTask, TaskRandom) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("student", "", 1, "Study");
+
+	test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "student1Study");
+}
+
+TEST(addTask, TaskFull) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("student", "Homwork 4 and Job 2", 1, "Study");
+
+	test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "studentHomwork 4 and Job 21Study");
+}
+
+TEST(addTask, TaskDescTag) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("student", "I hate my life", 0, "Personal");
+
+	test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "studentI hate my life0Personal");
+}
+
+TEST(addTask, TaskPrioTag) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Mom", "", 2, "Business");
+
+        test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "Mom2Business");
+}
+
+TEST(addTask, TaskWeird) {
+        MainMenu test;
+        string total="";
+        string title="";
+        string desc= "";
+        string prio= "";
+        string tag= "";
+        Task* A = new Task("Mom", "1.Do This 2.read-_= +*+ UwU @^@ $#%3. Sleep", 1, "Event");
+
+        test.addTask(A);
+
+        title=  test.GetDates().at(0)->getTitle();
+        desc=  test.GetDates().at(0)->getDesc();
+        prio= to_string(test.GetDates().at(0)->getPrio());
+        tag= test.GetDates().at(0)->getTag();
+        total += title + desc + prio + tag;
+
+        EXPECT_EQ(total, "Mom1.Do This 2.read-_= +*+ UwU @^@ $#%3. Sleep1Event");
+}
+
+TEST(showTask, taskDisplay) {
+	MainMenu test;
+	Task* A = new Task("Doggy", "It's an animal", 3, "Dog");
+	Task* B = new Task("Catto", "It's a monster", 2, "Cat");
+
+	test.addTask(A);
+	test.addTask(B);
+
+        EXPECT_EQ(test.getPrintedList(test.GetDates()), test.getPrintedList(test.GetPriorities()));
+}
+```
+These 14 tests would yeild the results:
+```
+[==========] Running 14 tests from 4 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from outputOldUserCSV
+[ RUN      ] outputOldUserCSV.EmptyCSV
+Failed to open old user file AllUserNames/unittest1.csv
+unittest1's profile has been created instead.
+[       OK ] outputOldUserCSV.EmptyCSV (0 ms)
+[----------] 1 test from outputOldUserCSV (0 ms total)
+
+[----------] 2 tests from deleteTask
+[ RUN      ] deleteTask.SuccesfulDeletion
+
+[       OK ] deleteTask.SuccesfulDeletion (0 ms)
+[ RUN      ] deleteTask.FailedDeletion
+
+[       OK ] deleteTask.FailedDeletion (0 ms)
+[----------] 2 tests from deleteTask (0 ms total)
+
+[----------] 10 tests from addTask
+[ RUN      ] addTask.TaskAddition
+
+[       OK ] addTask.TaskAddition (0 ms)
+[ RUN      ] addTask.NewTaskTitle
+
+[       OK ] addTask.NewTaskTitle (0 ms)
+[ RUN      ] addTask.TaskDesc
+
+[       OK ] addTask.TaskDesc (0 ms)
+[ RUN      ] addTask.TaskPrio
+
+[       OK ] addTask.TaskPrio (0 ms)
+[ RUN      ] addTask.TaskTag
+
+[       OK ] addTask.TaskTag (0 ms)
+[ RUN      ] addTask.TaskRandom
+
+[       OK ] addTask.TaskRandom (0 ms)
+[ RUN      ] addTask.TaskFull
+
+[       OK ] addTask.TaskFull (0 ms)
+[ RUN      ] addTask.TaskDescTag
+
+[       OK ] addTask.TaskDescTag (0 ms)
+[ RUN      ] addTask.TaskPrioTag
+
+[       OK ] addTask.TaskPrioTag (0 ms)
+[ RUN      ] addTask.TaskWeird
+
+[       OK ] addTask.TaskWeird (0 ms)
+[----------] 10 tests from addTask (0 ms total)
+
+[----------] 1 test from showTask
+[ RUN      ] showTask.taskDisplay
+
+[       OK ] showTask.taskDisplay (0 ms)
+[----------] 1 test from showTask (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 14 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 14 tests.
+```
+## Inputs and Outputs
 ### New User Startup Menu
 ```
 ---------------------------------------
